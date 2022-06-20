@@ -41,7 +41,7 @@ def run_apriori(data, min_sup):
 
 def run_association_rules(data, min_threshold, min_sup):
     frequent_items = apriori(data, min_sup, use_colnames=True)
-    association = association_rules(frequent_items, metric="confidence", min_threshold=0.8)
+    association = association_rules(frequent_items, metric="confidence", min_threshold=min_threshold)
     association = pd.DataFrame(association)
     association["antecedents"] = association["antecedents"].apply(list)
     association["consequents"] = association["consequents"].apply(list)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     st.write("Frequent items")
     frequent_items = run_apriori(data, min_support)
     st.dataframe(frequent_items)
-    association = run_association_rules(data, min_threshold, min_support)
+    #association = run_association_rules(data, min_threshold, min_support)
 
     st.write("Association rules")
     if show_equations:
